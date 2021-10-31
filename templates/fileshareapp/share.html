@@ -1,0 +1,63 @@
+{% extends 'fileshareapp/base.html' %}
+
+{% block content %}
+
+<div class="container-sm">
+    <h2>Upload New File</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" placeholder="Title" name="title" class="input_title">
+        <div class="form-group">
+          <label for="inputFile">File</label>
+          <input type="file" name="file" class="form-control-file input_file" id="inputFile" required>
+        </div>
+        
+        <p>Description:</p>
+        <div class="input-group">
+            <textarea class="form-control" name="description" aria-label="With textarea"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-lg post-btn">Share</button>
+    </form>
+    
+</div>
+
+
+
+<style>
+    h2{
+        text-align: center;
+        font-weight: bold;
+    }
+    .container-sm{
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 35%;
+        background-color: white;
+        padding: 15px;
+        border-radius: 15px;
+    }
+    .input_title{
+        margin:10px 0px 30px 100px;
+        width: 300px;
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    .form-group{
+        margin-left: 90px;
+    }
+
+    p{
+        font-weight: bold;
+        margin: 15px 0px 1px 200px;
+        font-size: 18px;
+    }
+
+    .post-btn{
+        margin-top: 20px;
+        margin-left: 205px;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'fileshareapp/base.html' %} 
+
+{% load static %}
+{% block content %}
+
+{% for post in posts reversed%}
+    {% if post.username == current_user %}
+        <h3 style="color:saddlebrown; font-weight: bold;">~You</h3>
+    {%else %}
+        <h3>@{{post.username}}</h3>
+    {% endif %}
+    <div class="container-sm mysection">
+        <h4>{{post.title}}</h3>
+            <p>{{post.datetime}}</p>
+            {% if post.file %}
+                <a href="{{post.file.url}}" download><button type="button" class="btn btn-primary download-btn">Download the File</button></a>
+            {% else %}
+                <p>No File Attached</p>
+            {% endif %}
+
+        {% if post.description %}
+        <div class="description-section">
+            <p class="description-heading">Description:</p>
+            <p class="description">{{post.description}}</p>
+        </div>
+        {% endif %}
+    </div>
+{% endfor %}
+
+
+<style>
+    .mysection{
+        background-color:whitesmoke;
+        font-family: 'Arimo', sans-serif;
+        width: 55%;
+        border-radius: 20px;
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-bottom: 3px;
+        position: relative;
+    }
+
+    h4{
+        font-weight: bold;
+    }
+    
+    .download-btn{
+        border-radius: 5px;
+        margin:5px 0px 15px 2px;
+    }
+
+    .download-btn:hover{
+        background-color: blue;
+        color: white;
+    }
+
+    .description-section{
+        background-color: rgb(226, 226, 226);
+        padding:5px;
+        border-radius: 10px;
+    }
+    .description-heading{
+        font-weight: bold;
+    }
+    
+    h3{
+        margin-left: 350px;
+        margin-top: 30px;
+        margin-bottom: 1px;
+        color: rgb(42, 111, 240);
+
+    }
+
+  
+</style>
+
+<script>
+    $(document).ready(function()
+    {
+        $(".image-link").magnificPopup({type: 'image'});
+    })
+</script>
+{% endblock %}

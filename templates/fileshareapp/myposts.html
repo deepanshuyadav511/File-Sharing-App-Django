@@ -1,0 +1,67 @@
+{% extends 'fileshareapp/base.html' %}
+{% load static %}
+{% block content %}
+
+{% for post in posts reversed %}
+    {% if post.username == current_user %}
+    <div class="container-sm mysection">
+        <h4>{{post.title}}</h3>
+        <p>{{post.datetime}}</p>
+        <a class = "image-link" href="{{post.image.url}}" download><button type="button" class="btn btn-primary view-btn">Download the File</button></a>
+        
+        <a href="delete/{{post.id}}"><button type="button" name="delete-btn" class="btn btn-danger">Delete</button></a>
+        
+        
+        {% if post.description %}
+        <div class="description-section">
+            <p class="description-heading">Description:</p>
+            <p class="description">{{post.description}}</p> 
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endfor %}
+
+<style>
+    .mysection{
+        background-color:whitesmoke;
+        font-family: 'Arimo', sans-serif;
+        width: 55%;
+        border-radius: 20px;
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-bottom: 3px;
+        margin-top: 30px;
+    }
+
+    h4{
+        font-weight: bold;
+
+    }
+    .view-btn{
+        margin-top: 8px;
+        margin-bottom: 8px;
+        margin-left: 100px;
+    }
+
+    .download-btn{
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+
+    .download-btn:hover{
+        background-color: rgb(151, 151, 151);
+        color: white;
+    }
+
+    .description-section{
+        background-color: rgb(226, 226, 226);
+        padding:5px;
+        border-radius: 10px;
+    }
+    .description-heading{
+        font-weight: bold;
+    }
+
+</style>
+{% endblock %}
